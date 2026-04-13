@@ -11,3 +11,81 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Landlord {
+  id String @id @default(uuid())
+
+  email String @unique
+  password String // bcrypt hash
+  name String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  renters Renter[]
+  properties Property[]
+}
+
+model Renter {
+  id          String     @id @default(uuid())
+  name        String
+  email       String?    // optional contact email
+  phone       String?    // optional contact phone
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  landlordId  String
+  landlord    Landlord   @relation(fields: [landlordId], references: [id])
+
+  leases      Lease[]
+}
+
+model Property {
+  id          String     @id @default(uuid())
+  address     String
+  unit        String?    // apartment/unit number if applicable
+  city        String
+  state       String
+  zip         String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  landlordId  String
+  landlord    Landlord   @relation(fields: [landlordId], references: [id])
+
+  leases      Lease[]
+}
+
+model Lease {
+  id          String     @id @default(uuid())
+  rentAmount  Float      // monthly rent in dollars
+  dueDayOfMonth Int      // 1-28 (day of month rent is due)
+  startDate   DateTime   // when the lease began
+  endDate     DateTime?  // null = month-to-month / ongoing
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  renterId    String
+  renter      Renter     @relation(fields: [renterId], references: [id])
+
+  propertyId  String
+  property    Property   @relation(fields: [propertyId], references: [id])
+
+  payments    Payment[]
+}
+
+model Payment {
+  id          String     @id @default(uuid())
+  month       Int        // 1-12
+  year        Int        // e.g. 2026
+  isPaid      Boolean    @default(false)
+  paidDate    DateTime?  // when the landlord marked it paid
+  notes       String?    // optional note
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  leaseId     String
+  lease       Lease      @relation(fields: [leaseId], references: [id])
+
+  @@unique([leaseId, month, year]) // one payment record per month per lease
+}
