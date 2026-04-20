@@ -1,6 +1,17 @@
 import fastify from "fastify";
+import prismaPlugin from './plugins/prisma'
+import rentersRoutes from './routes/renters'
+import propertyRoutes from './routes/properties'
+import leasesRoutes from './routes/leases'
+import paymentRoutes from './routes/payments'
+import 'dotenv/config'
 
 const app = fastify();
+app.register(prismaPlugin)
+app.register(rentersRoutes)
+app.register(propertyRoutes)
+app.register(leasesRoutes)
+app.register(paymentRoutes)
 
 app.get('/health', async () => {
   return { status: 'ok' }

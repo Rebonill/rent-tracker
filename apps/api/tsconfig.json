@@ -6,5 +6,6 @@
     "outDir": "dist",
     "rootDir": "src",
     "esModuleInterop": true
-  }
+  },
+  "include": ["src"]
 }
