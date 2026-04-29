@@ -1,13 +1,15 @@
 import { FastifyInstance } from 'fastify'
-
-const TEMP_LANDLORD_ID = 'id1234' // same ID as in renters.ts
+import { authenticate } from '../middleware/authenticate'
+// same ID as in renters.ts
 
 export default async function (app: FastifyInstance) {
+
+  app.addHook('onRequest', authenticate)
 
   // List all properties for the landlord
   app.get('/properties', async (request, reply) => {
     const properties = await app.prisma.property.findMany({
-      where: { landlordId: TEMP_LANDLORD_ID }
+      where: { landlordId: request.user.landlordId }
     })
     return properties
   })
@@ -36,7 +38,7 @@ export default async function (app: FastifyInstance) {
             city,
             state,
             zip,
-            landlordId: TEMP_LANDLORD_ID
+            landlordId: request.user.landlordId
       }
     })
     return reply.status(201).send(property)

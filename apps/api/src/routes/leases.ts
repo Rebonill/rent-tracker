@@ -1,6 +1,9 @@
 import { FastifyInstance } from 'fastify'
+import { authenticate } from '../middleware/authenticate'
 
 export default async function (app: FastifyInstance) {
+  
+  app.addHook('onRequest', authenticate)
 
   // Create a new lease (ties a renter to a property)
   app.post('/leases', {

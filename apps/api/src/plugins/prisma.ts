@@ -9,6 +9,13 @@ declare module 'fastify' {
   }
 }
 
+declare module '@fastify/jwt' {
+  interface FastifyJWT {
+    payload: { landlordId: string}
+    user: { landlordId: string }
+  }
+}
+
 const prismaPlugin = fp(async (app) => {
   const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL })
   const adapter = new PrismaPg(pool)

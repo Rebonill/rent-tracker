@@ -1,12 +1,14 @@
 import { FastifyInstance } from "fastify";
-
-const TEMP_LANDLORD_ID = 'id1234';
+import { authenticate } from '../middleware/authenticate';
 
 export default async function (app: FastifyInstance) {
 
+    // Apply auth to all routes in this plugin
+    app.addHook('onRequest', authenticate)
+
     app.get('/renters', async (request, reply) => {
         const renters = await app.prisma.renter.findMany({
-            where: { landlordId: TEMP_LANDLORD_ID },
+            where: { landlordId: request.user.landlordId },
             include: {
             leases: {
                 where: { isActive: true },
@@ -36,7 +38,7 @@ export default async function (app: FastifyInstance) {
             name,
             email,
             phone,
-            landlordId: TEMP_LANDLORD_ID
+            landlordId: request.user.landlordId
             }
         })
         return reply.status(201).send(renter)

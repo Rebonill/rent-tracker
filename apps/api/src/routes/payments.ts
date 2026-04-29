@@ -1,6 +1,9 @@
 import { FastifyInstance } from 'fastify'
+import { authenticate } from '../middleware/authenticate'
 
 export default async function (app: FastifyInstance) {
+
+  app.addHook('onRequest', authenticate)
 
   // Toggle a payment's paid status for a given month
   app.post('/payments/toggle', {
