@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct RentTrackerApp: App {
+    @StateObject private var authViewModel = AuthViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Group {
+                if authViewModel.isAuthenticated{
+                    HomeView()
+                } else{
+                    LoginView()
+                }
+            }
+            .environmentObject(authViewModel)
         }
     }
 }
