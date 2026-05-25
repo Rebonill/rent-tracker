@@ -66,10 +66,10 @@ model Lease {
   updatedAt   DateTime   @updatedAt
 
   renterId    String
-  renter      Renter     @relation(fields: [renterId], references: [id])
+  renter      Renter     @relation(fields: [renterId], references: [id], onDelete: Cascade)
 
   propertyId  String
-  property    Property   @relation(fields: [propertyId], references: [id])
+  property    Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
   payments    Payment[]
 }
@@ -85,7 +85,7 @@ model Payment {
   updatedAt   DateTime   @updatedAt
 
   leaseId     String
-  lease       Lease      @relation(fields: [leaseId], references: [id])
+  lease       Lease      @relation(fields: [leaseId], references: [id], onDelete: Cascade)
 
   @@unique([leaseId, month, year]) // one payment record per month per lease
 }

@@ -109,13 +109,13 @@ class ApiClient {
            
            var request = URLRequest(url: url)
            request.httpMethod = method
-           request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-           
+
            if authenticated, let token = KeychainHelper.shared.getToken() {
                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
            }
-           
+
            if let body = body {
+               request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
                request.httpBody = try JSONSerialization.data(withJSONObject: body)
            }
            
@@ -130,8 +130,13 @@ class ApiClient {
            logResponse(data, httpResponse)
 
            guard (200...299).contains(httpResponse.statusCode) else {
-               logError(APIError.invalidResponse, data)
-               throw APIError.invalidResponse
+               var serverMessage = "Unknown error"
+               if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let message = json["error"] as? String {
+                   serverMessage = message
+               }
+               logError(APIError.serverError(statusCode: httpResponse.statusCode, message: serverMessage), data)
+               throw APIError.serverError(statusCode: httpResponse.statusCode, message: serverMessage)
            }
        }
     

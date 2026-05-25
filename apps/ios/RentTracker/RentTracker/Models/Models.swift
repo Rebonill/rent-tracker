@@ -18,16 +18,16 @@ struct AuthResponse: Codable {
     let landlord: Landlord
 }
 
-struct Renter: Codable, Identifiable {
+struct Renter: Codable, Identifiable, Hashable {
     let id: String
     let name: String
     let email: String?
     let phone: String?
-    let kandlordId: String
+    let landlordId: String
     let leases: [Lease]?
 }
 
-struct Property: Codable, Identifiable {
+struct Property: Codable, Identifiable, Hashable {
     let id: String
     let address: String
     let unit: String?
@@ -36,7 +36,7 @@ struct Property: Codable, Identifiable {
     let zip: String
 }
 
-struct Lease: Codable, Identifiable {
+struct Lease: Codable, Identifiable, Hashable {
     let id: String
     let rentAmount: Double
     let dueDayOfMonth: Int
@@ -47,7 +47,7 @@ struct Lease: Codable, Identifiable {
     let payments: [Payment]?
 }
 
-struct Payment: Codable, Identifiable {
+struct Payment: Codable, Identifiable, Hashable {
     let id: String
     let month: Int
     let year: Int
