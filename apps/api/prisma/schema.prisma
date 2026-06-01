@@ -79,6 +79,7 @@ model Payment {
   month       Int        // 1-12
   year        Int        // e.g. 2026
   isPaid      Boolean    @default(false)
+  amountPaid  Float      @default(0)  // running total of partial payments
   paidDate    DateTime?  // when the landlord marked it paid
   notes       String?    // optional note
   createdAt   DateTime   @default(now())
@@ -87,5 +88,17 @@ model Payment {
   leaseId     String
   lease       Lease      @relation(fields: [leaseId], references: [id], onDelete: Cascade)
 
+  partialPayments PartialPayment[]
+
   @@unique([leaseId, month, year]) // one payment record per month per lease
+}
+
+model PartialPayment {
+  id          String     @id @default(uuid())
+  amount      Float
+  note        String?
+  createdAt   DateTime   @default(now())
+
+  paymentId   String
+  payment     Payment    @relation(fields: [paymentId], references: [id], onDelete: Cascade)
 }

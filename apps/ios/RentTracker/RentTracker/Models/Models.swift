@@ -52,6 +52,15 @@ struct Payment: Codable, Identifiable, Hashable {
     let month: Int
     let year: Int
     let isPaid: Bool
+    let amountPaid: Double?
     let paidDate: String?
     let notes: String?
+    let partialPayments: [PartialPayment]?
+}
+
+struct PartialPayment: Codable, Identifiable, Hashable {
+    let id: String
+    let amount: Double
+    let note: String?
+    let createdAt: String
 }

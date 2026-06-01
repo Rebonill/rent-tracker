@@ -1,0 +1,100 @@
+/* Login */
+"RentTracker" = "RentTracker";
+"Email" = "Correo electrónico";
+"Password" = "Contraseña";
+"Log In" = "Iniciar sesión";
+"Don't have an account? Sign Up" = "¿No tienes cuenta? Regístrate";
+
+/* Register */
+"Create Account" = "Crear cuenta";
+"Name" = "Nombre";
+"Confirm Password" = "Confirmar contraseña";
+"Passwords don't match" = "Las contraseñas no coinciden";
+"Sign Up" = "Registrarse";
+
+/* Home */
+"Dashboard" = "Panel";
+"Loading renters..." = "Cargando inquilinos...";
+"No Renters Yet" = "Aún no hay inquilinos";
+"Tap the + button to add your first renter." = "Toca + para agregar tu primer inquilino.";
+"Logout" = "Cerrar sesión";
+
+/* Renter Detail */
+"Renter" = "Inquilino";
+"Phone" = "Teléfono";
+"Property" = "Propiedad";
+"Address" = "Dirección";
+"City" = "Ciudad";
+"State" = "Estado";
+"ZIP" = "Código postal";
+"Lease" = "Contrato";
+"Rent" = "Renta";
+"Due" = "Vencimiento";
+"Status" = "Estado";
+"Active" = "Activo";
+"Inactive" = "Inactivo";
+"Payment History" = "Historial de pagos";
+"Current Month" = "Mes actual";
+"Upcoming" = "Próximos";
+"No active lease" = "Sin contrato activo";
+"Edit" = "Editar";
+
+/* Payment Row */
+"Paid" = "Pagado";
+"Unpaid" = "Sin pagar";
+"Add Payment" = "Agregar pago";
+"Mark Paid" = "Marcar pagado";
+"Mark Unpaid" = "Marcar sin pagar";
+
+/* Add Partial Payment */
+"Month" = "Mes";
+"Rent Due" = "Renta a pagar";
+"Already Paid" = "Ya pagado";
+"Remaining" = "Restante";
+"Payment" = "Pago";
+"Amount ($)" = "Monto ($)";
+"Note (optional)" = "Nota (opcional)";
+"Enter an amount" = "Ingresa un monto";
+"Cancel" = "Cancelar";
+
+/* Add Renter */
+"Renter Info" = "Info del inquilino";
+"Email (optional)" = "Correo (opcional)";
+"Phone (optional)" = "Teléfono (opcional)";
+"Property Info" = "Info de la propiedad";
+"Unit (optional)" = "Unidad (opcional)";
+"Lease Info" = "Info del contrato";
+"Rent Amount ($)" = "Monto de renta ($)";
+"Due Day of Month" = "Día de vencimiento";
+"Start Date" = "Fecha de inicio";
+"Save" = "Guardar";
+
+/* Edit Renter */
+"Edit Renter" = "Editar inquilino";
+"Rent Amount" = "Monto de renta";
+"Discard Changes?" = "¿Descartar cambios?";
+"You have unsaved changes that will be lost." = "Tienes cambios sin guardar que se perderán.";
+"Discard" = "Descartar";
+"Keep Editing" = "Seguir editando";
+"Toggle" = "Alternar";
+
+/* Payment History */
+"Year" = "Año";
+"Summary" = "Resumen";
+"Collected" = "Cobrado";
+"Outstanding" = "Pendiente";
+"Monthly Breakdown" = "Desglose mensual";
+"Not paid" = "Sin pagar";
+
+/* Interpolated strings */
+"the %@ of each month" = "el %@ de cada mes";
+"Past Months (%lld)" = "Meses anteriores (%lld)";
+"No payment records for %lld" = "No hay registros de pago para %lld";
+"Paid on %@" = "Pagado el %@";
+"Show %lld month%@ ahead" = "Mostrar %lld mes%@ adelante";
+"%lld month%@" = "%lld mes%@";
+"s" = "es";
+
+/* Errors */
+"Error" = "Error";
+"OK" = "OK";
